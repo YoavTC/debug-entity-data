@@ -1,0 +1,1 @@
+$data modify entity @n[type=text_display,tag=dbg] text.extra[0].text set string entity @s $(key)
