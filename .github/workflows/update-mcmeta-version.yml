@@ -1,0 +1,40 @@
+on:
+  release:
+    types: [published]
+
+jobs:
+  update-pack-meta:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download release asset
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release download ${{ github.event.release.tag_name }} \
+            --repo ${{ github.repository }} \
+            --pattern "*.zip" \
+            --dir ./release
+
+      - name: Modify pack.mcmeta
+        env:
+          RELEASE_NAME: ${{ github.event.release.name }}
+        run: |
+          cd release
+          ZIP_FILE=$(ls *.zip)
+          unzip "$ZIP_FILE" -d extracted
+          jq --arg name "$RELEASE_NAME" \
+            '.pack.description[0].text = $name + "\n"' \
+            extracted/src/pack.mcmeta > tmp.json && mv tmp.json extracted/src/pack.mcmeta
+          cd extracted
+          zip -r "../$ZIP_FILE" .
+          cd ..
+          rm -rf extracted
+
+      - name: Re-upload to release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload ${{ github.event.release.tag_name }} \
+            release/*.zip --clobber
