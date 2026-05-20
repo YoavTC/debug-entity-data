@@ -1,0 +1,1 @@
+execute as @a[scores={ded.uin=1}] run scoreboard players reset @s ded.uin
