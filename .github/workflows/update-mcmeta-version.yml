@@ -1,40 +1,43 @@
 on:
-  release:
-    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version (e.g. 1.0.0)"
+        required: true
+      release_name:
+        description: "Release title (e.g. Debug Entity Data v1.0)"
+        required: true
 
 jobs:
-  update-pack-meta:
+  build-and-release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - name: Download release asset
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh release download ${{ github.event.release.tag_name }} \
-            --repo ${{ github.repository }} \
-            --pattern "*.zip" \
-            --dir ./release
+      - uses: actions/checkout@v4
 
-      - name: Modify pack.mcmeta
+      - name: Update pack.mcmeta
         env:
-          RELEASE_NAME: ${{ github.event.release.name }}
+          RELEASE_NAME: ${{ github.event.inputs.release_name }}
         run: |
-          cd release
-          ZIP_FILE=$(ls *.zip)
-          unzip "$ZIP_FILE" -d extracted
           jq --arg name "$RELEASE_NAME" \
             '.pack.description[0].text = $name + "\n"' \
-            extracted/pack.mcmeta > tmp.json && mv tmp.json extracted/pack.mcmeta
-          cd extracted
-          zip -r "../$ZIP_FILE" .
-          cd ..
-          rm -rf extracted
+            src/pack.mcmeta > tmp.json && mv tmp.json src/pack.mcmeta
 
-      - name: Re-upload to release
+      - name: Build zip
+        env:
+          VERSION: ${{ github.event.inputs.version }}
+        run: |
+          cd src
+          zip -r "../debug-entity-data-$VERSION.zip" .
+
+      - name: Create release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ github.event.inputs.version }}
+          RELEASE_NAME: ${{ github.event.inputs.release_name }}
         run: |
-          gh release upload ${{ github.event.release.tag_name }} \
-            release/*.zip --clobber
+          gh release create "v$VERSION" \
+            "debug-entity-data-$VERSION.zip" \
+            --title "$RELEASE_NAME" \
+            --notes ""
