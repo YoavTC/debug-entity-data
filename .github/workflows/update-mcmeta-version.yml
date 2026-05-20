@@ -26,7 +26,7 @@ jobs:
           unzip "$ZIP_FILE" -d extracted
           jq --arg name "$RELEASE_NAME" \
             '.pack.description[0].text = $name + "\n"' \
-            extracted/src/pack.mcmeta > tmp.json && mv tmp.json extracted/src/pack.mcmeta
+            extracted/pack.mcmeta > tmp.json && mv tmp.json extracted/pack.mcmeta
           cd extracted
           zip -r "../$ZIP_FILE" .
           cd ..
