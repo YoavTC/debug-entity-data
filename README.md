@@ -2,14 +2,6 @@
 
 [preview.webm](https://github.com/user-attachments/assets/d6f0ef79-22cf-4ad1-b7f6-272d805461aa)
 
----
-
-- [Installing](#installing)
-- [How to use](#how-to-use)
-- [Limitations](#limitations)
-
----
-
 ## Installing
 
 Download the latest release fron the [releases tab](https://github.com/YoavTC/debug-entity-data/releases), open your Minecraft world directory and place the downloaded pack inside the datapack directory.
