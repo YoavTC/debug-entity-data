@@ -7,6 +7,10 @@ schedule clear ded:internal/uin/cancel
 scoreboard objectives remove ded.length_index
 scoreboard objectives remove ded.uin
 
+# Remove tags
+tag @e remove ded.selected_entity
+tag @e remove ded.executing_command
+
 # Clear data
 execute as @e[tag=ded.do_update] run function ded:unbind
 

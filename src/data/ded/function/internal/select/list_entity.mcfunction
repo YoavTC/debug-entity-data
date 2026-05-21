@@ -1,0 +1,1 @@
+$tellraw @p[tag=ded.executing_command] {color:yellow,selector:"@s",click_event:{action:"run_command",command:"execute as @e[nbt={UUID:$(UUID)}] run function ded:bind"}}
