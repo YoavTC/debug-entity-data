@@ -4,7 +4,7 @@
 
 ## Installing
 
-Download the latest release fron the [releases tab](https://github.com/YoavTC/debug-entity-data/releases), open your Minecraft world directory and place the downloaded pack inside the datapack directory.
+Download the latest release from the [releases tab](https://github.com/YoavTC/debug-entity-data/releases), open your Minecraft world directory and place the downloaded pack inside the datapack directory.
 If the world is loaded, execute `/reload` or quit and rejoin.
 
 To uninstall the pack run:
