@@ -1,4 +1,4 @@
-# Lis the possible entities to the player
+# List the possible entities to the player
 execute if entity @s[type=player] run return run function ded:internal/select/list
 
 # Ran after the player selects an entity (as the entity)
