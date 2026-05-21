@@ -33,5 +33,7 @@ To "delete" or "unbind" the floating text element, you can run:
 
 ## Limitations
 
+> This version of the pack uses [experimental settings](https://minecraft.wiki/w/Data_pack#Experimental_Settings). For a non-experimental version, check out the [non-experimental branch](https://github.com/YoavTC/debug-entity-data/tree/non-experimental)
+
 The pack supports only simple `byte`, `boolean`, `short`, `int`, `long`, `float` and `double`,
 as well as lists of those types.
