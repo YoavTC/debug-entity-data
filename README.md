@@ -20,10 +20,12 @@ And delete the files from the datapack directory.
 Execute the function :
 
 ```
-/execute as <ENTITY> run function ded:bind {key:<DATA PATH>}
+/function ded:bind
 ```
 
-Replace "`<ENTITY>`" with your selector (`@n`, `@e[type=item]`, etc..), and the "`<DATA PATH>`" with a valid data path on the target entity (you can see all valid data paths by doing `/data get entity <ENTITY>`).
+This will output a list of close entities to the chat. Click the message of the one you want, and a dialogue will appear.
+
+In the dialogue, input the NBT data path that you want to debug. You can see all valid data paths by doing `/data get entity <ENTITY>`.
 
 To "delete" or "unbind" the floating text element, you can run:
 
