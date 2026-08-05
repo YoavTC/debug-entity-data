@@ -1,0 +1,1 @@
+$data modify entity @s text set value [{"entity":"@s","nbt":"data.path",interpret:true},{"text":"\n"},{"entity":"@n[nbt={UUID:$(target)}]","interpret":false,"nbt":"$(path)"}]
