@@ -1,0 +1,20 @@
+{
+    "criteria": {
+        "edit": {
+            "trigger": "player_interacted_with_entity",
+            "conditions": {
+                "entity": {
+                    "type": "entity_properties",
+                    "entity": "this",
+                    "predicate": {
+                        "entity_type": "interaction",
+                        "nbt": {"Tags":["ded.debug_interaction_type"]}
+                    }
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "ded:_events/edit_type"
+    }
+}

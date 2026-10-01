@@ -1,5 +1,6 @@
 {
     "values": [
-        "ded:internal/_tick"
+        "ded:internal/_tick",
+        "ded:internal_type/tick"
     ]
 }
